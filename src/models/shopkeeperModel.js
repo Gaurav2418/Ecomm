@@ -2,19 +2,17 @@ const mongoose = require('mongoose')
 
 const ownerSchema = mongoose.Schema(
     {
-        name: {
-            type: String,
-            required: true
-        },
-        email: {
+        userDetails: {
+            type: mongoose.Schema.ObjectId,
+            ref: "allUser",
+            required: true,
+          },
+        subscription_status: {
             type: String,
             required: true,
-            set: (v) => v.toLowerCase()
+            default: false
         },
-        password: {
-            type: String,
-            required: true
-        }
+        
     }
 )
 

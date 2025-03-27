@@ -101,12 +101,13 @@ const loginController = async (req, res) => {
 
     // if pass match
     const token = jwt.sign({id: user._id, role:user.role },  process.env.jwt_secret)
- 
+    // const a = req.user
     return res.status(200).send({
         success: true,
         message: "Login Successful",
         user,
-        token
+        token,
+        // a
       })
  
 }
