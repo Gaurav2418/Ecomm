@@ -13,6 +13,10 @@ const saleSchema = mongoose.Schema({
 
     brands: {
         type: String
+    },
+    
+    saleDescription: {
+        type: String
     }
 })
 

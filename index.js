@@ -3,9 +3,10 @@ const app = express()
 app.use(express.json())
 require('dotenv').config()
 const connectDB = require('./src/dbConnection')
-// const shopkeeperRoutes = require('./src/routes/shopkeeperRoute')
+const shopkeeperRoutes = require('./src/routes/shopkeeperRoute')
 const authRoutes = require('./src/routes/authRoutes')
-
+const searchRoutes = require('./src/routes/searchRoutes')
+app.use(express.json())
 
 const cors = require('cors')
 app.use(cors())
@@ -16,6 +17,8 @@ app.get('/', (req, res) =>{
 })
 
 app.use('/api', authRoutes)
+app.use('/api', shopkeeperRoutes)
+app.use('/api', searchRoutes)
 
 app.listen(8080, ()=> {
     console.log('server is running on port 8080')

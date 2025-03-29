@@ -50,7 +50,7 @@ const existingUser = await userModel.findOne({email});
 //   save data in db
   const owner = await userModel({
     name,
-    email,
+    email: email.toLowerCase(),
     password: hashedPassword,
     role
   }).save()
@@ -102,6 +102,7 @@ const loginController = async (req, res) => {
     // if pass match
     const token = jwt.sign({id: user._id, role:user.role },  process.env.jwt_secret)
     // const a = req.user
+    // we can undefined password here to send user obj in response
     return res.status(200).send({
         success: true,
         message: "Login Successful",
