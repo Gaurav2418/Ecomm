@@ -8,5 +8,5 @@ router.get('/check', (req, res) => {
     res.send("check msg from search routes")
 })
 
-router.get('/search', verifyToken, searchSale)
+router.post('/search', verifyToken, searchSale)
 module.exports = router;

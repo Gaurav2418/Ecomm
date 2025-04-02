@@ -9,6 +9,6 @@ router.get('/base', (req, res)=>{
 
 router.post('/register', registerController)
 router.post('/login', loginController)
-router.get('/login', verifyToken, loginController)
+// router.get('/login', verifyToken, loginController)
 
 module.exports = router;
