@@ -22,7 +22,7 @@ const data = await saleModel({
 }).save()
  // Find the newly created sale document
 console.log(data._id)
- const populatedData = await saleModel.findById(data._id).populate('userDetails')
+ const populatedData = await saleModel.findById(data._id).populate('userDetails',"email role")
 
 
 return res.status(200).send({

@@ -39,7 +39,7 @@ const existingUser = await userModel.findOne({email});
   if( existingUser ){
     return res.status(409).send({
         success: false,
-        message: "User already exists with thil email"
+        message: "User already exists with this email"
     })
   }
 
@@ -103,6 +103,7 @@ const loginController = async (req, res) => {
     const token = jwt.sign({id: user._id, role:user.role },  process.env.jwt_secret)
     // const a = req.user
     // we can undefined password here to send user obj in response
+    user.password = undefined;
     return res.status(200).send({
         success: true,
         message: "Login Successful",
