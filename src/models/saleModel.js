@@ -14,7 +14,9 @@ const saleSchema = mongoose.Schema({
     brands: {
         type: String
     },
-    
+    product: {
+        type: String
+    },
     saleDescription: {
         type: String
     }

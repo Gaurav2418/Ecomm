@@ -11,8 +11,8 @@ const searchSale = async (req, res) => {
     try {
         let query = {};
         if ( !brands && !category){
-            return res.status(403).send("Please provide category or brands you want to search")
-
+            // returning all the sales
+            query = {};
         }
         
         // Add conditions to the query object only if they exist
