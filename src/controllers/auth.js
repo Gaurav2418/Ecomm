@@ -1,8 +1,11 @@
 // controller for login, signup
 const ownerModel = require('../models/shopkeeperModel')
 const userModel =  require('../models/authModel')
-const {hashPassword, comparePassword } = require('../authHelper')
+const { hashPassword, comparePassword } = require('../authHelper')
 const jwt = require("jsonwebtoken")
+const crypto = require("crypto");
+const nodemailer = require("nodemailer");
+const{ sendVerificationMail, sendPassResetMail } = require('./emailService')
 
 const registerController = async (req, res) => {
 
@@ -53,7 +56,15 @@ const existingUser = await userModel.findOne({email});
     email: email.toLowerCase(),
     password: hashedPassword,
     role
-  }).save()
+  })
+
+  // Generate and store the verification token
+  owner.verificationToken = crypto.randomBytes(20).toString("hex");
+
+  // Save the user to the database
+  await owner.save();
+
+  sendVerificationMail(email, owner.verificationToken);
 
   return res.status(200).send({
     success: true,
@@ -114,4 +125,57 @@ const loginController = async (req, res) => {
  
 }
 
-module.exports = { registerController, loginController }
+
+const resetController = async (req, res) => {
+const email = req.body.email;
+
+// const password = req.body.newPassword;
+
+try {
+        const userFound = await userModel.findOne({email})
+      // console.log(email, password)
+      // console.log(userFound)
+      if(!userFound){
+        res.status(404).send({
+          success: false,
+          message: "User doesn't found"
+        })
+      }
+      // if user found in db then start pass reset process by sending link to pass reset api on registered email address of user
+      const d = await sendPassResetMail(email);
+      return res.send(d)
+
+
+} catch (error) {
+  return res.send({
+    success: false,
+    message: "server error",
+    errorm :error.message 
+  })
+}
+}
+
+
+const handleNewPassController = async (req, res) => {
+  // i/p form user
+const recievedOTP = req.body.OTP;
+const newPassword = req.body.newPassword;
+
+// i/p form context config from frontend // pass this data obj form frontend
+const email = req.body.email
+
+const hashedPassword = await hashPassword(newPassword);
+
+ const updatedUser = await userModel.findOneAndUpdate(
+        { email : email },
+        { password: hashedPassword },
+        { new: true }
+      );
+return res.status(200).send({
+  success: true,
+  message : "password updated",
+  updatedUser
+})
+}
+
+module.exports = { registerController, loginController, resetController, handleNewPassController }

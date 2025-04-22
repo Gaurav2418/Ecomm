@@ -22,7 +22,15 @@ const userSchema = mongoose.Schema(
             enum: ["user", "shopkeeper"],
             required: true,
             
-        }
+        },
+        verified: {
+            type: Boolean,
+            default: false,
+          },
+          verificationToken: String,
+        PROTP: {
+            type: Number,
+          },
     },
     {
         timestamps: true
