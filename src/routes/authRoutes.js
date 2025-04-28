@@ -3,6 +3,7 @@ const router = express.Router()
 const { registerController, loginController, resetController, handleNewPassController } = require('../controllers/auth')
 const verifyToken = require('../../middlewares/verifyMiddleware')
 const userModel =  require('../models/authModel')
+const { sendVerificationMail } = require('../controllers/emailService')
 
 router.get('/base', (req, res)=>{
     return res.send("hello user")
@@ -10,6 +11,14 @@ router.get('/base', (req, res)=>{
 
 router.post('/register', registerController)
 router.post('/login', loginController)
+
+router.post('/verifyemail', async (req, res) => {
+  const { email } = req.body;
+  const user = await userModel.findOne({ email});
+  const res = sendVerificationMail(email, user.verificationToken);
+  console.log(res)
+});
+
 
 // route to verify email address
 router.get('/verify/:token', async (req, res) => {
