@@ -159,7 +159,7 @@ try {
 const handleNewPassController = async (req, res) => {
   // i/p form user
 const recievedOTP = req.body.OTP;
-const newPassword = req.body.newPassword;
+const newPassword = req.body.newPassword1;
 
 // i/p form context config from frontend // pass this data obj form frontend
 const email = req.body.email
@@ -173,24 +173,30 @@ try {
     })
   }
   // check if OTP is correct or not
-  if(existingUser.PROTP !== recievedOTP){
+  if(existingUser.PROTP == recievedOTP){
+    const hashedPassword = await hashPassword(newPassword);
+
+    const updatedUser = await userModel.findOneAndUpdate(
+           { email : email },
+           { password: hashedPassword },
+           { new: true }
+         );
+   
+   return res.status(200).send({
+     success: true,
+     message : "password updated",
+     updatedUser
+   })
+  }
+  else{
     return res.status(400).send({
       success: false,
       message: "Invalid OTP"
     })
-  }
-  const hashedPassword = await hashPassword(newPassword);
 
- const updatedUser = await userModel.findOneAndUpdate(
-        { email : email },
-        { password: hashedPassword },
-        { new: true }
-      );
-return res.status(200).send({
-  success: true,
-  message : "password updated",
-  updatedUser
-})
+  }
+
+
 } catch (error) {
   console.log(error)
   return res.status(500).send({
