@@ -54,7 +54,9 @@ const createProfileController = async (req, res) => {
     const shopkeeperDocumentId = owner._id 
     req.user = shopkeeperDocumentId
 
-    const shoplocation = "nagar"
+    const shoplocation = req.body.LocationLink;
+    // const subscription_status = req.body.subscription_status;
+
     // Creating profile and saving in db
     const data = await shopkeeperModel({
         userDetails: owner._id,

@@ -33,7 +33,7 @@ const sendVerificationMail = async (email, verificationToken) => {
           <h2>Welcome to Team NST!</h2>
           <p>Hi there,</p>
           <p>Thank you for signing up. Please verify your email address by clicking the button below:</p>
-          <a href="http://localhost:8080/api/verify/${verificationToken}" 
+          <a href="https://ecomm-153c.onrender.com/api/verify/${verificationToken}" 
              style="display: inline-block; padding: 10px 20px; margin: 10px 0; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">
              Verify Email
           </a>
