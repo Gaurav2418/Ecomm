@@ -15,8 +15,12 @@ router.post('/login', loginController)
 router.post('/verifyemail', async (req, res) => {
   const { email } = req.body;
   const user = await userModel.findOne({ email});
-  const res = sendVerificationMail(email, user.verificationToken);
-  console.log(res)
+  const res1 = sendVerificationMail(email, user.verificationToken);
+  console.log(res1)
+  res.send({
+    success: true,
+    message: "Verification email sent successfully",
+  });
 });
 
 
@@ -45,8 +49,8 @@ router.get('/verify/:token', async (req, res) => {
 
 
 //   route for password reset
-router.post('/pass-reset', verifyToken, resetController);
-router.post('/password', verifyToken, handleNewPassController)
+router.post('/pass-reset', resetController);
+router.post('/password',  handleNewPassController)
 
 
 module.exports = router;
