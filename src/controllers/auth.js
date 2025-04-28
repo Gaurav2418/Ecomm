@@ -164,7 +164,22 @@ const newPassword = req.body.newPassword;
 // i/p form context config from frontend // pass this data obj form frontend
 const email = req.body.email
 
-const hashedPassword = await hashPassword(newPassword);
+try {
+  const existingUser = await userModel.findOne({email})
+  if(!existingUser){
+    return res.status(404).send({
+      success: false,
+      message: "User not found"
+    })
+  }
+  // check if OTP is correct or not
+  if(existingUser.PROTP !== recievedOTP){
+    return res.status(400).send({
+      success: false,
+      message: "Invalid OTP"
+    })
+  }
+  const hashedPassword = await hashPassword(newPassword);
 
  const updatedUser = await userModel.findOneAndUpdate(
         { email : email },
@@ -176,6 +191,14 @@ return res.status(200).send({
   message : "password updated",
   updatedUser
 })
+} catch (error) {
+  console.log(error)
+  return res.status(500).send({
+    success: false,
+    message: "server error, error in updating password",
+    errorm :error.message 
+  })
+}
 }
 
 module.exports = { registerController, loginController, resetController, handleNewPassController }
