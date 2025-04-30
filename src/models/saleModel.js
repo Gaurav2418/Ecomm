@@ -6,7 +6,11 @@ const saleSchema = mongoose.Schema({
         ref: "alluser",
         required: true,
             },
-
+    shopProfile: {
+        type: mongoose.Schema.ObjectId,
+        ref: "shopowner",
+        required: true,
+            },
     category: {
         type: String,
         },
@@ -19,7 +23,10 @@ const saleSchema = mongoose.Schema({
     },
     saleDescription: {
         type: String
-    }
+    },
+    keyWords: {
+        type: String
+    },
 })
 
 module.exports = mongoose.model('sale', saleSchema)

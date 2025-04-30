@@ -20,6 +20,14 @@ const ownerSchema = mongoose.Schema(
             required: true,
             default: false
         },
+        address: {
+            type: String,
+            required: true,
+          },
+        landmarks: {
+            type: String,
+            required: true,
+          },
         currentPlan: {
           name: String,         // e.g., "Basic Plan"
           price: Number,        // e.g., 500

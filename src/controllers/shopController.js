@@ -55,12 +55,25 @@ const createProfileController = async (req, res) => {
     req.user = shopkeeperDocumentId
 
     const shoplocation = req.body.LocationLink;
+    const address = req.body.address;
+    const landmarks = req.body.landmarks;
     // const subscription_status = req.body.subscription_status;
+
+    // check if the shopkeepers profile is already created or not
+    const existingProfile = await shopkeeperModel.findOne({userDetails: owner._id});
+    if (existingProfile) {
+        return res.status(400).send({
+            message:"Profile already exists",
+            existingProfile
+        })
+    }
 
     // Creating profile and saving in db
     const data = await shopkeeperModel({
         userDetails: owner._id,
-        shopLocation:shoplocation
+        shopLocation:shoplocation,
+        address,
+        landmarks
     }).save()
     return res.status(200).send(data)
     }
