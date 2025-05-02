@@ -9,7 +9,7 @@ const paymentController = (req, res) => {
 
 
 const saleController = async (req, res) => {
-const {brands, category, product} = req.body
+const {brands, category, product, shopProfile} = req.body
 
 if(!brands && !category){
     return res.status(400).send("To post a sale you must enter Brands or category")
@@ -17,6 +17,7 @@ if(!brands && !category){
 
 const data = await saleModel({
     userDetails:req.user.id,
+    shopProfile,
     brands,
     product,
     category
