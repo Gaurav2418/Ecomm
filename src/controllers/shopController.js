@@ -35,13 +35,13 @@ return res.status(200).send({
 
 const getProfileController = async (req, res) => {
 console.log(req.user)
-const owner = await allUserModel.findOne({_id: req.user.id})                    // data from alluser collection (i.e. auth data name, email, role)
-const profData = await shopkeeperModel.findOne({email: req.user.email})         // data from shopowner collection
+const ownerGenericData = await allUserModel.findOne({_id: req.user.id})                    // data from alluser collection (i.e. auth data name, email, role)
+const ownerProfData = await shopkeeperModel.findOne({email: req.user.email})         // data from shopowner collection
 
 // we can access here both alluser, shopowner collections from db
-console.log(profData)
-console.log(owner)
-return res.status(200).send(owner)
+console.log(ownerGenericData)
+console.log(ownerProfData)
+return res.status(200).send({ownerProfData,ownerGenericData}) // sending the data of shopkeeper profile to frontend
 }
 
 
