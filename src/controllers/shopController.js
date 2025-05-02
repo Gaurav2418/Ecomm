@@ -37,9 +37,8 @@ const getProfileController = async (req, res) => {
 console.log(req.user)
 const {email} = req.body;
 const ownerGenericData = await allUserModel.findOne({_id: req.user.id}).select('-password')                    // data from alluser collection (i.e. auth data name, email, role)
-const ownerProfData = await shopkeeperModel.findOne({email: req.user.email})         // data from shopowner collection
+const ownerProfData = await shopkeeperModel.findOne({userDetails:req.user.id})         // data from shopowner collection
 
-console.log(req.user.email)
 
 // we can access here both alluser, shopowner collections from db
 // console.log(ownerGenericData)
