@@ -35,12 +35,15 @@ return res.status(200).send({
 
 const getProfileController = async (req, res) => {
 console.log(req.user)
-const ownerGenericData = await allUserModel.findOne({_id: req.user.id})                    // data from alluser collection (i.e. auth data name, email, role)
+const {email} = req.body;
+const ownerGenericData = await allUserModel.findOne({_id: req.user.id}).select('-password')                    // data from alluser collection (i.e. auth data name, email, role)
 const ownerProfData = await shopkeeperModel.findOne({email: req.user.email})         // data from shopowner collection
 
+console.log(req.user.email)
+
 // we can access here both alluser, shopowner collections from db
-console.log(ownerGenericData)
-console.log(ownerProfData)
+// console.log(ownerGenericData)
+// console.log(ownerProfData)
 return res.status(200).send({ownerProfData,ownerGenericData}) // sending the data of shopkeeper profile to frontend
 }
 
@@ -57,13 +60,19 @@ const createProfileController = async (req, res) => {
     const shoplocation = req.body.LocationLink;
     const address = req.body.address;
     const landmarks = req.body.landmarks;
+    const email = req.body.email;
     // const subscription_status = req.body.subscription_status;
 
     // check if the shopkeepers profile is already created or not
     const existingProfile = await shopkeeperModel.findOne({userDetails: owner._id});
     if (existingProfile) {
-        return res.status(400).send({
-            message:"Profile already exists",
+        existingProfile.address = address;
+        existingProfile.landmarks = landmarks;
+        existingProfile.shopLocation = shoplocation;
+
+        existingProfile.save()
+        return res.status(201).send({
+            message:"Profile already exists, and updated with new data",
             existingProfile
         })
     }

@@ -9,7 +9,7 @@ router.get('/base', (req, res)=>{
     return res.send("hello shopkeeper")
 })
 
-router.get('/profile', verifyToken, getProfileController)
+router.post('/profile', verifyToken, getProfileController)
 // router.post('/profile', verifyToken, authorizeRoles)
 router.post('/create-profile', verifyToken, authorizeRoles("shopkeeper"), createProfileController)
 router.post('/create-sale', verifyToken, authorizeRoles("shopkeeper"), saleController)
