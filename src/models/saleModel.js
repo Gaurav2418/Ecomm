@@ -27,6 +27,18 @@ const saleSchema = mongoose.Schema({
     keyWords: {
         type: String
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    
+      // TTL deletion field
+      expireAt: {
+        type: Date,
+        required: true,
+      },
 })
+// TTL index: auto-delete after "expireAt" time is reached
+saleSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 });
 
 module.exports = mongoose.model('sale', saleSchema)

@@ -9,7 +9,9 @@ const paymentController = (req, res) => {
 
 
 const saleController = async (req, res) => {
-const {brands, category, product, shopProfile} = req.body
+const {brands, category, product, shopProfile, validityDays} = req.body
+const now = new Date();
+const expireAt = new Date(now.getTime() + validityDays * 24 * 60 * 60 * 1000); // add days in ms
 
 if(!brands && !category){
     return res.status(400).send("To post a sale you must enter Brands or category")
@@ -20,7 +22,8 @@ const data = await saleModel({
     shopProfile,
     brands,
     product,
-    category
+    category,
+    expireAt
 }).save()
  // Find the newly created sale document
 console.log(data._id)
