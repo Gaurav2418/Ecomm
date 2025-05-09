@@ -30,7 +30,7 @@ const searchSale = async (req, res) => {
         }
 
         // const results = await saleModel.find(query)
-        const results = await saleModel.find().populate('shopProfile', 'address landmarks').exec();
+        const results = await saleModel.find().populate('shopProfile', 'address landmarks shopLocation').exec();
         console.log(results)
         return res.send(results)
 
