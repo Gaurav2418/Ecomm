@@ -64,7 +64,7 @@ const searchSaleByBannerClicks = async (req, res) => {
         };
 
         // Step 4: Perform the query on the Sale model
-        const results = await saleModel.find(query);
+        const results = await saleModel.find(query).populate('shopProfile', 'address landmarks shopLocation');
 
         // Step 5: Return the results
         if (results.length > 0) {
