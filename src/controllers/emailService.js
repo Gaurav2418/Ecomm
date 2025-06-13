@@ -10,7 +10,7 @@ const sendVerificationMail = async (email, verificationToken) => {
       // 1st configure email service
       service:"gmail",
       auth: {
-        user: "gwakhare2418@gmail.com",
+        user: "teamnstofficial@gmail.com",
         pass: process.env.mail_passkey
       }
     });
@@ -75,7 +75,7 @@ console.log(updatedUser);
         // 1st configure email service
         service:"gmail",
         auth: {
-          user: "gwakhare2418@gmail.com",
+          user: "teamnstofficial@gmail.com",
           pass: process.env.mail_passkey
         }
       });
