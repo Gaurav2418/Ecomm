@@ -21,7 +21,7 @@ app.get('/', (req, res) =>{
 app.use('/api', authRoutes)
 app.use('/api', shopkeeperRoutes)
 app.use('/api', searchRoutes)
-// app.use('/api', paymentRoutes)
+app.use('/api', paymentRoutes)
 
 app.listen(8080, ()=> {
     console.log('server is running on port 8080')
