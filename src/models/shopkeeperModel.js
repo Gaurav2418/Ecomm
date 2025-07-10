@@ -16,7 +16,7 @@ const ownerSchema = mongoose.Schema(
             required: true,
           },
         subscription_status: {
-            type: String,
+            type: Boolean,
             required: true,
             default: false
         },
