@@ -7,7 +7,7 @@ const { name, price, validityDays, activatedDate, shopOwnerDocumentID } = req.bo
 
 try {
     const responseData = await ownerModel.findByIdAndUpdate(
-        {_id: shopOwnerDocumentID },
+         shopOwnerDocumentID ,
         {
             subscription_status: true,
             currentPlan: {
