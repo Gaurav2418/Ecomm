@@ -7,7 +7,7 @@ const { RAZORPAY_KEY_ID, RAZORPAY_SECRET } = process.env;
  router.post('/create-order', createOrderController)
 
 router.post('/verify-payment', (req, res) => {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body.paymentData;
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
     console.log("Payment Data:", req.body.paymentData);
   
     const generatedSignature = crypto
