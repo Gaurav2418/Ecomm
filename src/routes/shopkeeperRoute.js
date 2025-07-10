@@ -15,7 +15,7 @@ router.post('/profile', verifyToken, getProfileController)
 router.post('/create-profile', verifyToken, authorizeRoles("shopkeeper"), createProfileController)
 router.post('/create-sale', verifyToken, authorizeRoles("shopkeeper"), checkPlanValidityController, saleController)
 
-router.post('/add-subscription', verifyToken, authorizeRoles("shopkeeper"), activatePlanController )
+// router.post('/add-subscription', verifyToken, authorizeRoles("shopkeeper"), activatePlanController )
 // router.post('/login', loginController)
 
 module.exports = router;
