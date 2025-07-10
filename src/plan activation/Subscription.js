@@ -3,7 +3,7 @@ const ownerModel = require("../models/shopkeeperModel");
 
 
 const activatePlanController = async (req, res) => {
-const { name, price, validityDays, activatedDate, shopOwnerDocumentID } = req.body.planData;
+const { name, price, validityDays, activatedDate, shopOwnerDocumentID } = req.body;
 
 try {
     const responseData = await ownerModel.findByIdAndUpdate(
