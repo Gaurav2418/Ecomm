@@ -6,7 +6,7 @@ const { RAZORPAY_KEY_ID, RAZORPAY_SECRET } = process.env;
 
  router.post('/create-order', createOrderController)
 
-router.post('/verify-payment', (req, res) => {
+router.post('/verify-payment', async (req, res) => {
     const { paymentData, planData  } = req.body;
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = paymentData;
     const { name, price, validityDays, shopOwnerDocumentID } = planData;
@@ -44,7 +44,7 @@ router.post('/verify-payment', (req, res) => {
       
       } catch (error) {
           console.log(error);
-          res.status(500).send({
+          return res.status(500).send({
               success: false,
               message: "Plan activation failed, error in activePlanController",
               error: error.message
