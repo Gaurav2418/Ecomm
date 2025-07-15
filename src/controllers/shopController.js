@@ -64,7 +64,7 @@ const createProfileController = async (req, res) => {
     const address = req.body.address;
     const landmarks = req.body.landmarks;
     const email = req.body.email;
-    const mobileNo = req.body.mobileNo;
+    const mobile = req.body.mobile;
     // const subscription_status = req.body.subscription_status;
 
     // check if the shopkeepers profile is already created or not

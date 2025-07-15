@@ -24,7 +24,7 @@ const ownerSchema = mongoose.Schema(
             type: String,
             required: true,
           },
-          mobileNo:{
+          mobile:{
             type: String,
             required: true,
           },
