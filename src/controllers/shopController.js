@@ -87,7 +87,8 @@ const createProfileController = async (req, res) => {
         userDetails: owner._id,
         shopLocation:shoplocation,
         address,
-        landmarks
+        landmarks,
+        mobile
     }).save()
     return res.status(200).send(data)
     }
