@@ -3,7 +3,7 @@ const router = express.Router();
 const { createOrderController } = require('../payments/razorpayController.js');
 const crypto = require('crypto');
 const { RAZORPAY_KEY_ID, RAZORPAY_SECRET } = process.env;
-const ownerModel = require('../models/shopOwnerModel.js');
+const ownerModel = require('../models/shopkeeperModel.js');
 
  router.post('/create-order', createOrderController)
 
