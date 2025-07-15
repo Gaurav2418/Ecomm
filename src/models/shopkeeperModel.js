@@ -24,6 +24,10 @@ const ownerSchema = mongoose.Schema(
             type: String,
             required: true,
           },
+          mobileNo:{
+            type: String,
+            required: true,
+          },
         landmarks: {
             type: String,
             required: true,

@@ -64,6 +64,7 @@ const createProfileController = async (req, res) => {
     const address = req.body.address;
     const landmarks = req.body.landmarks;
     const email = req.body.email;
+    const mobileNo = req.body.mobileNo;
     // const subscription_status = req.body.subscription_status;
 
     // check if the shopkeepers profile is already created or not
@@ -72,6 +73,7 @@ const createProfileController = async (req, res) => {
         existingProfile.address = address;
         existingProfile.landmarks = landmarks;
         existingProfile.shopLocation = shoplocation;
+        existingProfile.mobileNO = mobileNo;
 
         existingProfile.save()
         return res.status(201).send({
