@@ -73,7 +73,7 @@ const createProfileController = async (req, res) => {
         existingProfile.address = address;
         existingProfile.landmarks = landmarks;
         existingProfile.shopLocation = shoplocation;
-        existingProfile.mobileNO = mobileNo;
+        existingProfile.mobile = mobile;
 
         existingProfile.save()
         return res.status(201).send({
