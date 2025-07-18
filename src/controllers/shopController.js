@@ -9,7 +9,7 @@ const paymentController = (req, res) => {
 
 
 const saleController = async (req, res) => {
-const {brands, category, product, shopProfile, validityDays} = req.body
+const {brands, category, product, shopProfile, validityDays, description} = req.body
 const now = new Date();
 const expireAt = new Date(now.getTime() + validityDays * 24 * 60 * 60 * 1000); // add days in ms
 
@@ -23,6 +23,7 @@ const data = await saleModel({
     brands,
     product,
     category,
+    saleDescription: description,
     expireAt
 }).save()
  // Find the newly created sale document
