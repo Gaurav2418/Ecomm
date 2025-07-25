@@ -26,7 +26,7 @@ const ownerSchema = mongoose.Schema(
           },
           mobile:{
             type: String,
-            required: true,
+            // required: true,
           },
         landmarks: {
             type: String,
